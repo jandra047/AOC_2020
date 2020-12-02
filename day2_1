@@ -1,0 +1,13 @@
+file = open("day2", "r").read().splitlines()[:-1]
+
+valid = 0
+
+for line in file:
+	if (int(line.split(' ')[0].split('-')[0]) <= line.split(' ')[2].count(line.split(' ')[1][:-1]) <= int(line.split(' ')[0].split('-')[1])):
+		valid+=1
+
+	
+print(valid)
+
+
+
