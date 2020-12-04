@@ -1,0 +1,14 @@
+file = open('day4.txt','r').read().split('\n\n')
+
+valid = 0
+
+for i in range(len(file)):
+	file[i] = ' '.join(file[i].split("\n")).replace(':', ' ').split(' ')
+
+	if (len(file[i]) > 14) or (len(file[i]) == 14 and 'cid' not in file[i]):
+		valid+=1
+	
+
+print(valid)
+
+
