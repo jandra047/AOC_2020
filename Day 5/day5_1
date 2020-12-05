@@ -1,0 +1,34 @@
+file = open('day5','r').read().splitlines()
+
+
+# eg 'FBFBBFFRLR' = row 44, col 5
+# 128 rows (0-127)
+# 8 columns (0-7)
+
+
+
+def seat_id(code):
+
+	row = list(range(128))
+	col = list(range(8))
+
+	for char in code:
+		if char == 'F':
+			row = row[:len(row)//2]
+		elif char == 'B':
+			row = row[len(row)//2:]
+		elif char == 'R':
+			col = col[len(col)//2:]
+		else:
+			col = col[:len(col)//2]
+	return row[0]*8 + col[0]
+
+
+max = 0
+
+for bpass in file:
+	
+	if seat_id(bpass) > max:
+		max = seat_id(bpass)
+
+print(max)
