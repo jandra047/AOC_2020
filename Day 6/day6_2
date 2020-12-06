@@ -1,0 +1,14 @@
+import string
+
+file = open('day6','r').read().split('\n\n')[:-1]
+
+sum = 0
+
+for group in file:
+	s = set(string.ascii_lowercase)
+	for person in group.split():
+		s = s.intersection(set(person))
+	sum+=len(s)
+
+print(sum)
+		

@@ -1,0 +1,10 @@
+file = open('day6','r').read().split('\n\n')
+
+sum = 0
+
+for group in file:
+	group = group.replace('\n','')
+	
+	sum += len(set(group))
+
+print(sum)
