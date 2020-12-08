@@ -1,0 +1,30 @@
+import re
+file = open('day7','r').read().splitlines()
+
+# striped blue bags contain 3 wavy white bags, 4 drab blue bags, 1 drab chartreuse bag, 4 dull orange bags.
+# you have shiny gold bag
+
+d={}
+[d.update([(x[0], x[1:])]) for x in [re.split(' bag, | bags. | bags, | bags contain | bag.',x)[:-1] for x in file]]
+
+
+def check_bag(bag, dict):
+    if any('shiny gold' in s for s in bag[1]):
+        return 1
+       
+    # elif bag[1][0] == 'no other':
+    #     return 0
+    else:
+        for b in bag[1]:
+            if d.get(b[2:])[0] != 'no other':
+                print('teest')
+                return check_bag((b[2:], d.get(b[2:])),d)
+    return 0
+
+    
+
+sum=0
+for bag in d.items():
+    sum+=check_bag(bag, d)
+
+print(sum)

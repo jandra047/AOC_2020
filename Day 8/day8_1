@@ -1,0 +1,26 @@
+import os
+file = open('day8', 'r').read().splitlines()
+
+i = 0
+num_it = [0 for elem in file]
+acc = 0
+
+while(True):
+    
+    num_it[i]+=1
+    
+    if 2 not in num_it:
+        if file[i].split(' ')[0] == 'acc':
+            acc += int(file[i].split(' ')[1])
+            i += 1
+        elif file[i].split(' ')[0] == 'jmp':
+            i += int(file[i].split(' ')[1])
+        else:
+            i += 1
+    else:
+        break
+
+
+
+
+print(acc)
