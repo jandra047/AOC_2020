@@ -1,0 +1,44 @@
+import math
+file = open('day12', 'r').read().splitlines()
+
+boat = {'facing': 'E', 'posx': 0, 'posy': 0}
+routes = ['N', 'E', 'S', 'W']
+
+def move(direction):
+    if direction == 'N':
+        boat['posy'] += int(line[1:])
+    if direction == 'S':
+        boat['posy'] -= int(line[1:])
+    if direction == 'E':
+        boat['posx'] += int(line[1:])
+    if direction == 'W':
+        boat['posx'] -= int(line[1:])
+
+def rotate(direction):
+
+    if direction == 'L':
+        boat['facing'] = routes[(routes.index(boat['facing']) + 4 - int(line[1:])//90)%4]
+    else:
+        boat['facing'] = routes[(routes.index(boat['facing']) + int(line[1:])//90)%4]
+
+    
+for line in file:
+
+    print(f'{line} {boat} \n')
+
+    if line[0] == 'N':
+        move('N')
+    if line[0] == 'S':
+        move('S')
+    if line[0] == 'E':
+        move('E')
+    if line[0] == 'W':
+        move('W')
+    if line[0] == 'L' or line[0] == 'R':
+        rotate(line[0])
+    if line[0] == 'F':
+        move(boat['facing'])
+
+print(f"{boat}\nManhattan distance: {abs(boat['posx']) + abs(boat['posy'])}")
+
+        

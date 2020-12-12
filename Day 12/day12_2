@@ -1,0 +1,43 @@
+import math
+file = open('day12', 'r').read().splitlines()
+
+boat = {'facing': 'E', 'posx': 0, 'posy': 0}
+waypoint = {'posx': 10, 'posy': 1}
+routes = ['N', 'E', 'S', 'W']
+
+
+def move(direction):
+    if direction == 'N':
+        waypoint['posy'] += int(line[1:])
+    elif direction == 'S':
+        waypoint['posy'] -= int(line[1:])
+    elif direction == 'E':
+        waypoint['posx'] += int(line[1:])
+    elif direction == 'W':
+        waypoint['posx'] -= int(line[1:])
+
+def rotate(rotation):
+
+    angle = math.radians(int(rotation[1:]))
+    if rotation[0] == 'R':
+        angle = -1*angle
+
+    rx = math.cos(angle) * waypoint['posx'] - math.sin(angle) * waypoint['posy']
+    ry = math.sin(angle) * waypoint['posx'] + math.cos(angle) * waypoint['posy']
+    
+    return round(rx), round(ry)
+
+
+
+for line in file:
+
+    if any(r in line[0] for r in routes):
+        move(line[0])
+    elif line[0] == 'F':
+        boat['posx'] += int(line[1:])*(waypoint['posx'])
+        boat['posy'] += int(line[1:])*(waypoint['posy'])    
+    else:
+        waypoint['posx'], waypoint['posy'] = rotate(line)
+
+print(f"{boat}\nManhattan distance: {abs(boat['posx']) + abs(boat['posy'])}")
+                
